@@ -5,12 +5,14 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdio.h>
+#include <fcntl.h>
 # include "get_next_line.h"
 
 
 # define WIDTH 1024
 # define HEIGHT 768
 # define DEFAULT_ANG 0.523599
+# define ESC 65307
 
 typedef struct s_point_param
 {
@@ -73,7 +75,40 @@ typedef struct s_fdf
 }	t_fdf;
 
 char		**ft_split(char *s, char c);
+int			ft_count_words(const char *str, char c);
+
 int			ft_atoi(const char *str);
 int			ft_atoi_hex(char *str);
+
+
+void 		fdf_init(t_fdf *fdf, char *filename, int *check_fd);
+void		initialize_camera(t_fdf *fdf);
+void		free_stack(t_stack *stack, t_fdf *fdf);
+
+int			main(int argc, char **argv);
+
+int			check_filename(char *filename);
+void		print_error(int error);
+
+int			insert_stack_element(char **sec_split, t_stack **stack);
+void		insert_at_top(t_stack **stack, t_stack *new);
+
+int			process_line_data(char *line, t_stack **stack, int *width, int *check_fd);
+int			check_line_width_error(int width, int i, int *check_fd, char **split);
+void		free_string_tab(char **tab);
+
+t_stack		*read_map(int fd, int *height, int *width, int *check_fd);
+int			get_line_info(char *line, t_stack **stack, int *width, int *check_fd);
+int			check_line_error(int width, int i, int *check_fd, char **split);
+void		free_tab(char **tab);
+
+int			esc_close(int key, t_fdf *param);
+int			close_win(t_fdf *param);
+
+void		draw_map(t_fdf *fdf);
+void		draw_y_line(t_fdf *fdf, int x, int y);
+void		draw_x_line(t_fdf *fdf, int x, int y);
+t_point3D	*apply_projection(t_point3D *p, t_fdf *fdf);
+t_point3D	*point_init(int x, int y, t_fdf *fdf);
 
 #endif
