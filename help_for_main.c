@@ -1,26 +1,23 @@
 #include "fdf.h"
 void	free_stack(t_stack *stack, t_fdf *fdf)
 {
-	t_stack *current;
-	t_stack *next_node;
+	t_stack	*ptr;
+	t_stack	*suiv;
 
-	// Освобождение памяти, занимаемой стеком, начиная с переданного указателя stack
 	while (stack != NULL)
 	{
-		next_node = stack->next;  // Сохраняем указатель на следующий узел
-		free(stack->z);           // Освобождаем память, занятую массивом z
-		free(stack);              // Освобождаем память, занимаемую текущим узлом стека
-		stack = next_node;        // Переходим к следующему узлу
+		suiv = stack->next;
+		free(stack->z);
+		stack = suiv;
 	}
-
-	// Освобождение памяти, занимаемой стеком, хранящимся в структуре fdf
-	while (fdf->stack != NULL)
+	while (fdf->stack)
 	{
-		current = fdf->stack;     // Сохраняем указатель на текущий узел
-		fdf->stack = fdf->stack->next;  // Переходим к следующему узлу в структуре fdf
-		free(current);           // Освобождаем память, занимаемую текущим узлом
+		ptr = fdf->stack->next;
+		free(fdf->stack);
+		fdf->stack = ptr;
 	}
 }
+
 void	initialize_camera(t_fdf *fdf)
 {
 	// Устанавливает значение увеличения (zoom) в зависимости от ширины карты (fdf->width)
