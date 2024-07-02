@@ -28,7 +28,7 @@ int	get_line_info(char *line, t_stack **stack, int *width, int *check_fd)
 {
 	int		i;
 	char	**split;
-	char	**sec_split;	
+	char	**sec_split;
 
 	split = ft_split(line, ' ');
 	i = 0;
@@ -62,7 +62,7 @@ t_stack	*read_map(int fd, int *height, int *width, int *check_fd)
 	if (tmp == NULL)
 		print_error(1);
 	stack = NULL;
-	*width = ft_count_words(tmp, ' ');
+	*width = ft_words(tmp, ' ');
 	while (tmp != NULL)
 	{
 		i++;

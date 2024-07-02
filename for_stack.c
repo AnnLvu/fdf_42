@@ -30,6 +30,6 @@ int	insert_stack_element(char **sec_split, t_stack **stack)
 	else
 		new_stack->z->color = -1;
 	new_stack->next = NULL;
-	stack_add_front(stack, new_stack);
+	insert_at_top(stack, new_stack);
 	return (0);
 }

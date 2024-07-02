@@ -1,73 +1,82 @@
 #include "fdf.h"
 
-static size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	ft_count_words(const char *str, char c)
+int	ft_words(const char *s, char c)
 {
 	int	i;
-	int	check;
 
 	i = 0;
-	check = 0;
-	while (str && *str)
+	while (*s != '\0')
 	{
-		if (*str != c && check == 0)
-		{
-			check = 1;
+		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
 			i++;
-		}
-		else if (*str == c)
-			check = 0;
-		str++;
+		s++;
 	}
 	return (i);
 }
 
-static char	*ft_copy_word(const char *str, int start, int end)
+static int	word_size(const char *s, char c)
 {
-	char	*word;
-	int		i;
+	int	i;
 
 	i = 0;
-	word = malloc((end - start + 1) * sizeof(char));
-	while (start < end)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**all;
-
-	all = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
-	if (!(s && all))
-		return (NULL);
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	while (*(s + i) != '\0' && *(s + i) != c)
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			all[j++] = ft_copy_word(s, index, i);
-			index = -1;
-		}
 		i++;
 	}
-	all[j] = 0;
-	return (all);
+	return (i);
+}
+
+static char	*fill_str(char *lil_str, const char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (*s != '\0' && *s != c)
+	{
+		*(lil_str + i) = *s;
+		i++;
+		s++;
+	}
+	*(lil_str + i) = '\0';
+	return (lil_str);
+}
+
+static void	*free_f(char **str, int i)
+{
+	while (i >= 0)
+	{
+		free(str + i);
+		i--;
+	}
+	free(str);
+	return (NULL);
+}
+
+char	**ft_split(char *s, char c)
+{
+	char	**tab;
+	int		i;
+	int		words;
+
+	if (s == NULL)
+		return (NULL);
+	words = ft_words(s, c);
+	tab = (char **)malloc(sizeof(char *) * (words + 1));
+	if (tab == 0)
+		return (NULL);
+	i = 0;
+	while (i < words)
+	{
+		while (*s == c && *s != '\0')
+			s++;
+		*(tab + i) = (char *)malloc(sizeof(char) * (word_size((s), c) + 1));
+		if (*(tab + i) == 0)
+			return (free_f(tab, i));
+		fill_str(*(tab + i), s, c);
+		while (*s != c && *s != '\0')
+			s++;
+		i++;
+	}
+	*(tab + i) = 0;
+	return (tab);
 }

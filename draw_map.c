@@ -25,7 +25,7 @@ t_point3D	*apply_projection(t_point3D *p, t_fdf *fdf)
 	z_rotation(&p->x, &p->y, &p->z, fdf->teta);
 	// Если выбранная проекция - изометрическая, применяем её
 	if (fdf->project == 1)
-		iso(&p->x, &p->y, p->z, fdf->def_ang);
+		isometr(&p->x, &p->y, p->z, fdf->def_ang);
 	// Смещаем точку на заданные координаты
 	p->x += fdf->x_pos;
 	p->y += fdf->y_pos;
@@ -46,7 +46,7 @@ void	draw_x_line(t_fdf *fdf, int x, int y)
 	else
 		fdf->color = fdf->matrix[y][x].z.color;
 	// Рисуем линию по оси x
-	bresnham(fdf, apply_projection(point_init(x, y, fdf), fdf), apply_projection(point_init(x + 1, y, fdf), fdf));
+	bresenham_line(fdf, apply_projection(point_init(x, y, fdf), fdf), apply_projection(point_init(x + 1, y, fdf), fdf));
 }
 
 // Устанавливает цвет и рисует линию по оси y
@@ -63,7 +63,7 @@ void	draw_y_line(t_fdf *fdf, int x, int y)
 	else
 		fdf->color = fdf->matrix[y][x].z.color;
 	// Рисуем линию по оси y
-	bresnham(fdf, projection(point_init(x, y, fdf), fdf), projection(point_init(x, y + 1, fdf), fdf));
+	bresenham_line(fdf, apply_projection(point_init(x, y, fdf), fdf), apply_projection(point_init(x, y + 1, fdf), fdf));
 }
 
 // Основная функция для рисования карты

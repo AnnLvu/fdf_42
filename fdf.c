@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 		mlx_loop(fdf->mlx_ptr);
 	}
 	else
-		check_error(2);
+		print_error(2);
 	return (0);
 }

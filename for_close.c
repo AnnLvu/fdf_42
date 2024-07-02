@@ -9,7 +9,7 @@ int	close_win(t_fdf *param)
 	// Освобождаем память, выделенную для mlx_ptr
 	free(param->mlx_ptr);
 	// Завершаем программу
-	 exit(0);
+	exit(0);
 }
 
 int	esc_close(int key, t_fdf *param)
