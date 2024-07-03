@@ -12,7 +12,7 @@
 # define WIDTH 1024
 # define HEIGHT 768
 # define DEFAULT_ANG 0.523599
-# define ESC 65307
+# define ESC 53
 
 typedef struct s_point_param
 {
@@ -96,11 +96,8 @@ void		insert_at_top(t_stack **stack, t_stack *new);
 int			process_line_data(char *line, t_stack **stack, int *width, int *check_fd);
 int			check_line_width_error(int width, int i, int *check_fd, char **split);
 void		free_string_tab(char **tab);
-
 t_stack		*read_map(int fd, int *height, int *width, int *check_fd);
-int			get_line_info(char *line, t_stack **stack, int *width, int *check_fd);
-int			check_line_error(int width, int i, int *check_fd, char **split);
-void		free_tab(char **tab);
+
 
 int			esc_close(int key, t_fdf *param);
 int			close_win(t_fdf *param);

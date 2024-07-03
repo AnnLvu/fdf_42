@@ -9,7 +9,6 @@ SRC = get_next_line_utils.c \
 		help_for_main.c \
 		map.c \
 		matrix.c \
-		read_map.c \
 		transformations.c
 
 OBJ = $(SRC:.c=.o)

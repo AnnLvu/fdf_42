@@ -28,7 +28,7 @@ int	process_line_data(char *line, t_stack **stack, int *width, int *check_fd)
 {
 	int		i;
 	char	**split;
-	char	**sec_split;	
+	char	**sec_split;
 
 	split = ft_split(line, ' ');
 	i = 0;
@@ -48,4 +48,32 @@ int	process_line_data(char *line, t_stack **stack, int *width, int *check_fd)
 	if (check_line_width_error(*width, i, check_fd, split))
 		return (1);
 	return (0);
+}
+
+t_stack	*read_map(int fd, int *height, int *width, int *check_fd)
+{
+	char	*tmp;
+	t_stack	*stack;
+	int		i;
+	int		check;
+
+	i = 0;
+	tmp = get_next_line(fd);
+	if (tmp == NULL)
+		print_error(1);
+	stack = NULL;
+	*width = ft_words(tmp, ' ');
+	while (tmp != NULL)
+	{
+		i++;
+		check = process_line_data(tmp, &stack, width, check_fd);
+		if (check != 0)
+			return (NULL);
+		free(tmp);
+		tmp = get_next_line(fd);
+	}
+	*height = i;
+	free(tmp);
+	close(fd);
+	return (stack);
 }
