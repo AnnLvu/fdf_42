@@ -84,6 +84,7 @@ int			ft_atoi_hex(char *str);
 void 		fdf_init(t_fdf *fdf, char *filename, int *check_fd);
 void		initialize_camera(t_fdf *fdf);
 void		free_stack(t_stack *stack, t_fdf *fdf);
+void		print_info(t_fdf *fdf);
 
 int			main(int argc, char **argv);
 
@@ -99,8 +100,11 @@ void		free_string_tab(char **tab);
 t_stack		*read_map(int fd, int *height, int *width, int *check_fd);
 
 
-int			esc_close(int key, t_fdf *param);
+int			key_zoom(int key, t_fdf *param);
 int			close_win(t_fdf *param);
+int			event_key(int key, t_fdf *param);
+int			altitude_and_proj(int key, t_fdf *param);
+int			translate_rot_map(int key, t_fdf *param);
 
 void		draw_map(t_fdf *fdf);
 void		draw_y_line(t_fdf *fdf, int x, int y);

@@ -18,6 +18,22 @@ void	free_stack(t_stack *stack, t_fdf *fdf)
 	}
 }
 
+void	print_info(t_fdf *fdf)
+{
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, WIDTH - 90, 0, \
+				0xffffff, "By Rigor");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 0, 0, \
+				0xffffff, "Translate MAP : UP / DOWN / LEFT / RIGHT");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 0, 20, \
+				0xffffff, "Rotation X/Y/Z AXSES : x/y/z");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 0, 40, \
+				0xffffff, "ZOOM IN/OUT : p/m");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 0, 60, \
+				0xffffff, "ALTITUDE VARIATION PLUS/MINUS : c/d");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 0, 80, \
+				0xffffff, "PROJECTION ISOMETRIC/PARALLEL : a/b");
+}
+
 void	initialize_camera(t_fdf *fdf)
 {
 	// Устанавливает значение увеличения (zoom) в зависимости от ширины карты (fdf->width)
@@ -34,10 +50,14 @@ void	initialize_camera(t_fdf *fdf)
 	fdf->y_pos = (HEIGHT / 2) - (fdf->height / 2);
 	// Устанавливает начальный тип проекции (project)
 	fdf->project = 1;	//изометрическую проекцию
-	// Устанавливает начальный угол камеры (def_ang)
-	fdf->def_ang = DEFAULT_ANG; // DEFAULT_ANG - это константа, задающая начальный угол (30 градусов в радианах)
 	// Устанавливает начальное значение высоты (altitude)
 	fdf->altitude = 1;	// Устанавливается масштаб высоты равным 1
+	fdf->rot = 0;
+	// Устанавливает начальный угол камеры (def_ang)
+	fdf->def_ang = DEFAULT_ANG; // DEFAULT_ANG - это константа, задающая начальный угол (30 градусов в радианах)
+	fdf->alpha = 0;
+	fdf->beta = 0;
+	fdf->teta = 0;
 }
 
 void	fdf_init(t_fdf *fdf, char *filename, int *check_fd)
