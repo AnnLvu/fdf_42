@@ -9,6 +9,11 @@ int	main(int argc, char **argv)
 	{
 		check_fd = 0;
 		fdf = (t_fdf *)malloc(sizeof(t_fdf));
+		if (!fdf)
+		{
+			print_error(3);
+			exit (1);
+		}
 		fdf_init(fdf, argv[1], &check_fd);
 		free(fdf->stack);
 		draw_map(fdf);

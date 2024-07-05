@@ -6,6 +6,8 @@ int	close_win(t_fdf *param)
 	mlx_destroy_image(param->mlx_ptr, param->img_ptr);
 	// Уничтожаем окно
 	mlx_destroy_window(param->mlx_ptr, param->win_ptr);
+	mlx_destroy_display(param->mlx_ptr);
+
 	// Освобождаем память, выделенную для mlx_ptr
 	free(param->mlx_ptr);
 	exit (1);
@@ -35,6 +37,7 @@ int	key_zoom(int key, t_fdf *param)
 	{
 		mlx_destroy_image(param->mlx_ptr, param->img_ptr);
 		mlx_destroy_window(param->mlx_ptr, param->win_ptr);
+		mlx_destroy_display(param->mlx_ptr);
 		free(param->mlx_ptr);
 		exit(0);
 	}
