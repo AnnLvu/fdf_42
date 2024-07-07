@@ -21,17 +21,28 @@ t_for_matrix	**create_matrix(t_fdf *fdf, t_stack *stack)
 
 	height = fdf->height;
 	width = fdf->width;
-	matrix = (t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
+	matrix = create_matrix_test(height);//(t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
 	if (!matrix)
 		return (NULL);
 
 	while (height-- > 0)
 	{
-		matrix[height] = (t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
+		matrix[height] = create_matrix_test_width(width);//(t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
 		if (!matrix[height])
 			return (NULL);
 		fill_data(matrix[height], &stack, fdf); // Используем matrix[height] здесь
 	}
 	matrix[fdf->height] = NULL; // Записываем NULL в конец массива
 	return (matrix);
+}
+
+
+t_for_matrix	**create_matrix_test(int height)
+{
+	return (t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
+}
+
+t_for_matrix	*create_matrix_test_width(int width)
+{
+	return (t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
 }

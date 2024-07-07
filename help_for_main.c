@@ -16,9 +16,20 @@ void	free_stack(t_stack *stack, t_fdf *fdf)
 		free(fdf->stack);
 		fdf->stack = ptr;
 	}
+	// free(fdf->stack->z);
+	// free(fdf->stack);
+	// free(fdf->mlx_ptr);
+	// free(fdf->win_ptr);
+	// free(fdf->img_ptr);
+	// free(fdf->img_data);
+	// int i = 0;
+	// while (i < fdf->height){
+	// 	free(fdf->matrix[i]);
+	// 	i++;
+	// }
 }
 
-void	print_info(t_fdf *fdf)
+void	 print_info(t_fdf *fdf)
 {
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, WIDTH - 90, 0, \
 				0xffffff, "By Rigor");

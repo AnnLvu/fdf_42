@@ -9,10 +9,21 @@ int	close_win(t_fdf *param)
 	mlx_destroy_display(param->mlx_ptr);
 
 	// Освобождаем память, выделенную для mlx_ptr
-	free(param->mlx_ptr);
+
+	// int i = 0;
+	// while (i < param->height){
+	// 	free(param->matrix[i]);
+	// 	i++;
+	// }
+
+	// free(param->matrix[0]);
+	// free(param->matrix[1]);
+	// free(param->matrix[2]);
+	// free(param->matrix[3]);
+	// free(param->matrix);
+	// free(param);
+		clean_all_for_fdf_struct(param);
 	exit (1);
-	// Завершаем программу
-	return (0);
 }
 int	key_zoom(int key, t_fdf *param)
 {
@@ -39,6 +50,17 @@ int	key_zoom(int key, t_fdf *param)
 		mlx_destroy_window(param->mlx_ptr, param->win_ptr);
 		mlx_destroy_display(param->mlx_ptr);
 		free(param->mlx_ptr);
+
+
+	clean_all_for_fdf_struct(param);
+	// int i = 0;
+	// while (i < param->height){
+	// 	free(param->matrix[i]);
+	// 	i++;
+	// }
+
+	// free(param->matrix);
+	// free(param);
 		exit(0);
 	}
 	return (0);
@@ -105,4 +127,15 @@ int	event_key(int key, t_fdf *param)
 			(param)->img_ptr, 0, 0);
 	print_info(param);
 	return (0);
+}
+
+void clean_all_for_fdf_struct(t_fdf *param){
+		int i = 0;
+	while (i < param->height){
+		free(param->matrix[i]);
+		i++;
+	}
+
+	free(param->matrix);
+	free(param);
 }

@@ -74,6 +74,9 @@ typedef struct s_fdf
 	double			teta;
 }	t_fdf;
 
+void clean_all_for_fdf_struct(t_fdf *param);
+t_for_matrix	*create_matrix_test_width(int width);
+t_for_matrix	**create_matrix_test(int height);
 char		**ft_split(char *s, char c);
 int			ft_words(const char *str, char c);
 

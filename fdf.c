@@ -15,7 +15,7 @@ int	main(int argc, char **argv)
 			exit (1);
 		}
 		fdf_init(fdf, argv[1], &check_fd);
-		free(fdf->stack);
+		// free(fdf->stack);
 		draw_map(fdf);
 		mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
 		print_info(fdf);
