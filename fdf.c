@@ -18,10 +18,8 @@ int	main(int argc, char **argv)
 		free(fdf->stack);
 		draw_map(fdf);
 		mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
-		mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, WIDTH - 90, 0, \
-				0xffffff, "FDF");
 		print_info(fdf);
-		mlx_hook(fdf->win_ptr, 2, 1L<<0, event_key, fdf);
+		mlx_hook(fdf->win_ptr, 2, 1L << 0, event_key, fdf);
 		mlx_hook(fdf->win_ptr, 17, 0L, close_win, fdf);
 		mlx_loop(fdf->mlx_ptr);
 	}
