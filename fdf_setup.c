@@ -61,7 +61,7 @@ void	fdf_init(t_fdf *fdf, char *filename, int *check_fd)
 	if (fd < 0)
 		print_error(1, fdf);
 	check_filename(filename, fdf);
-	fdf->stack = read_map(fd, &fdf->height, &fdf->width, check_fd, fdf);
+	fdf->stack = read_map(fd, check_fd, fdf, 0);
 	if (*check_fd == -1)
 		print_error(3, fdf);
 	else if (*check_fd == -2)

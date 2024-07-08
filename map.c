@@ -50,37 +50,46 @@ int	process_line_data(char *line, t_stack **stack, int *width, int *check_fd)
 	return (0);
 }
 
-t_stack	*read_map(int fd, int *height, int *width, int *check_fd, t_fdf *fdf)
+t_stack	*read_map(int fd, int *check_fd, t_fdf *fdf, int i)
 {
 	char	*tmp;
 	t_stack	*stack;
-	int		i;
 	int		check;
 
-	i = 0;
 	tmp = get_next_line(fd);
 	if (tmp == NULL)
 		print_error(1, fdf);
 	stack = NULL;
-	*width = ft_words(tmp, ' ');
+	fdf->width = ft_words(tmp, ' ');
 	while (tmp != NULL)
 	{
 		i++;
-		check = process_line_data(tmp, &stack, width, check_fd);
-		free(tmp);//pervoe mesto
-		if (check != 0){
-			free(stack->next->next->z);//vtoroe mesto
-			free(stack->next->next);
-			free(stack->next->z);
-			free(stack->next);
-			free(stack->z);
-			free(stack);
+		check = process_line_data(tmp, &stack, &fdf->width, check_fd);
+		free(tmp);
+		if (check != 0)
+		{
+			cleanup_stack(stack);
 			return (NULL);
 		}
-		tmp = get_next_line(fd);;
+		tmp = get_next_line(fd);
 	}
-	*height = i;
+	fdf->height = i;
 	free(tmp);
 	close(fd);
 	return (stack);
+}
+
+void	cleanup_stack(t_stack *stack)
+{
+	t_stack	*current;
+	t_stack	*next;
+
+	current = stack;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->z);
+		free(current);
+		current = next;
+	}
 }

@@ -10,6 +10,7 @@ SRC = get_next_line_utils.c \
 		fdf_setup.c \
 		map.c \
 		matrix.c \
+		get_next_line_free.c \
 		transformations.c
 
 OBJ_DIR = obj

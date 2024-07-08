@@ -91,7 +91,7 @@ int *check_fd);
 int				check_line_width_error(int width, int i, int *check_fd, \
 char **split);
 void			free_string_tab(char **tab);
-t_stack			*read_map(int fd, int *height, int *width, int *check_fd, t_fdf *fdf);
+t_stack			*read_map(int fd, int *check_fd, t_fdf *fdf, int i);
 int				key_zoom(int key, t_fdf *fdf);
 int				close_win(t_fdf *fdf);
 int				handle_keyboard(int key, t_fdf *fdf);
@@ -115,4 +115,6 @@ void			isometr(int *x, int *y, int z, double teta);
 t_for_matrix	**create_matrix(t_fdf *fdf, t_stack *stack);
 void			fill_matrix_row(t_for_matrix *matrix, t_stack **stack, \
 t_fdf *fdf);
+void			cleanup_stack(t_stack *stack);
+
 #endif

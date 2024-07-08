@@ -8,8 +8,9 @@ void	print_error(int error, t_fdf *fdf)
 		write(2, "Error: Invalid input parameters.\n", 33);
 	else if (error == 3)
 		write(2, "Error: Memory allocation failed.\n", 33);
-	else if (error == 4){
-		get_next_line(-42);//eto tretie part1
+	else if (error == 4)
+	{
+		get_next_line(-42);
 		write(2, "Error: Inconsistent line length in file. Exiting.\n", 50);
 	}
 	if (fdf != NULL)
