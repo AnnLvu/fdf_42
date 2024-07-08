@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	fill_data(t_for_matrix *matrix, t_stack **stack, t_fdf *fdf)
+void	fill_matrix_row(t_for_matrix *matrix, t_stack **stack, t_fdf *fdf)
 {
 	int	width;
 
@@ -15,34 +15,22 @@ void	fill_data(t_for_matrix *matrix, t_stack **stack, t_fdf *fdf)
 
 t_for_matrix	**create_matrix(t_fdf *fdf, t_stack *stack)
 {
-	t_for_matrix **matrix;
-	int height;
-	int width;
+	t_for_matrix	**matrix;
+	int				height;
+	int				width;
 
 	height = fdf->height;
 	width = fdf->width;
-	matrix = create_matrix_test(height);//(t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
+	matrix = (t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
 	if (!matrix)
 		return (NULL);
-
 	while (height-- > 0)
 	{
-		matrix[height] = create_matrix_test_width(width);//(t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
+		matrix[height] = (t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
 		if (!matrix[height])
 			return (NULL);
-		fill_data(matrix[height], &stack, fdf); // Используем matrix[height] здесь
+		fill_matrix_row(matrix[height], &stack, fdf);
 	}
-	matrix[fdf->height] = NULL; // Записываем NULL в конец массива
+	matrix[fdf->height] = NULL;
 	return (matrix);
-}
-
-
-t_for_matrix	**create_matrix_test(int height)
-{
-	return (t_for_matrix **)malloc(sizeof(t_for_matrix *) * (height + 1));
-}
-
-t_for_matrix	*create_matrix_test_width(int width)
-{
-	return (t_for_matrix *)malloc(sizeof(t_for_matrix) * width);
 }

@@ -4,14 +4,16 @@ SRC = get_next_line_utils.c \
 		bresenham_line.c \
 		check_error.c \
 		draw_map.c fdf.c \
-		for_close.c \
+		keyboard_actions.c \
+		keyboard_actions_two.c \
 		for_stack.c \
-		help_for_main.c \
+		fdf_setup.c \
 		map.c \
 		matrix.c \
 		transformations.c
 
-OBJ = $(SRC:.c=.o)
+OBJ_DIR = obj
+OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 CC_FLAGS = -Wall -Wextra -Werror
 CC = cc
@@ -21,16 +23,19 @@ MATH_FLAGS = -lm
 
 NAME = fdf
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CC_FLAGS) $(OBJ) $(MATH_FLAGS) $(MLX_FLAGS) -o $@
+	$(CC) $(CC_FLAGS) $(OBJ) $(MLX_FLAGS) $(MATH_FLAGS) -o $@
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
 	$(CC) $(CC_FLAGS) -c $< -o $@
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

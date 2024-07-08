@@ -15,11 +15,10 @@ int	main(int argc, char **argv)
 			exit (1);
 		}
 		fdf_init(fdf, argv[1], &check_fd);
-		// free(fdf->stack);
 		draw_map(fdf);
 		mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img_ptr, 0, 0);
 		print_info(fdf);
-		mlx_hook(fdf->win_ptr, 2, 1L << 0, event_key, fdf);
+		mlx_hook(fdf->win_ptr, 2, 1L << 0, handle_keyboard, fdf);
 		mlx_hook(fdf->win_ptr, 17, 0L, close_win, fdf);
 		mlx_loop(fdf->mlx_ptr);
 	}

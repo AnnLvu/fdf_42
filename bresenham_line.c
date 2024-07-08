@@ -15,8 +15,8 @@ void	put_pixel(t_fdf *fdf, int x, int y)
 	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
 	{
 		fdf->img_data = mlx_get_data_addr(fdf->img_ptr \
-				, &fdf->bpp, &fdf->size_line, &fdf->endian);
-		addr = fdf->img_data + (y * fdf->size_line + x * (fdf->bpp / 8));
+				, &fdf->bonp, &fdf->size_line, &fdf->endian);
+		addr = fdf->img_data + (y * fdf->size_line + x * (fdf->bonp / 8));
 		*(unsigned int *)addr = fdf->color;
 	}
 }

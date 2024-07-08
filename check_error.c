@@ -3,13 +3,13 @@
 void	print_error(int error)
 {
 	if (error == 1)
-		write(2, "FILE ERROR.\n", 12);
+		write(2, "Error: Unable to open file.\n", 28);
 	else if (error == 2)
-		write(2, "Invalid Parameters.\n", 21);
+		write(2, "Error: Invalid input parameters.\n", 33);
 	else if (error == 3)
-		write(2, "Allocation Error.\n", 18);
+		write(2, "Error: Memory allocation failed.\n", 33);
 	else if (error == 4)
-		write(2, "Found wrong line length Exiting.\n", 33);
+		write(2, "Error: Inconsistent line length in file. Exiting.\n", 50);
 	exit(1);
 }
 
