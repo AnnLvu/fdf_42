@@ -66,7 +66,8 @@ char	*get_next_line(int fd)
 	char		*buf;
 	static char	*current_line;
 
-	handle_special_cases(fd, &current_line);
+	if (fd == -1 || BUFFER_SIZE <= 0 || fd == -42)
+		return (handle_special_cases(fd, &current_line));
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
