@@ -82,8 +82,8 @@ void			initialize_camera(t_fdf *fdf);
 void			free_stack(t_stack *stack, t_fdf *fdf);
 void			print_info(t_fdf *fdf);
 int				main(int argc, char **argv);
-int				check_filename(char *filename);
-void			print_error(int error);
+int				check_filename(char *filename, t_fdf *fdf);
+void			print_error(int error, t_fdf *fdf);
 int				insert_stack_element(char **sec_split, t_stack **stack);
 void			insert_at_top(t_stack **stack, t_stack *new);
 int				process_line_data(char *line, t_stack **stack, int *width, \
@@ -91,7 +91,7 @@ int *check_fd);
 int				check_line_width_error(int width, int i, int *check_fd, \
 char **split);
 void			free_string_tab(char **tab);
-t_stack			*read_map(int fd, int *height, int *width, int *check_fd);
+t_stack			*read_map(int fd, int *height, int *width, int *check_fd, t_fdf *fdf);
 int				key_zoom(int key, t_fdf *fdf);
 int				close_win(t_fdf *fdf);
 int				handle_keyboard(int key, t_fdf *fdf);

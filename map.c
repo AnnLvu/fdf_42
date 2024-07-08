@@ -50,7 +50,7 @@ int	process_line_data(char *line, t_stack **stack, int *width, int *check_fd)
 	return (0);
 }
 
-t_stack	*read_map(int fd, int *height, int *width, int *check_fd)
+t_stack	*read_map(int fd, int *height, int *width, int *check_fd, t_fdf *fdf)
 {
 	char	*tmp;
 	t_stack	*stack;
@@ -60,7 +60,7 @@ t_stack	*read_map(int fd, int *height, int *width, int *check_fd)
 	i = 0;
 	tmp = get_next_line(fd);
 	if (tmp == NULL)
-		print_error(1);
+		print_error(1, fdf);
 	stack = NULL;
 	*width = ft_words(tmp, ' ');
 	while (tmp != NULL)
