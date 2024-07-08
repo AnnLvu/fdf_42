@@ -67,10 +67,17 @@ t_stack	*read_map(int fd, int *height, int *width, int *check_fd, t_fdf *fdf)
 	{
 		i++;
 		check = process_line_data(tmp, &stack, width, check_fd);
-		if (check != 0)
+		free(tmp);//pervoe mesto
+		if (check != 0){
+			free(stack->next->next->z);//vtoroe mesto
+			free(stack->next->next);
+			free(stack->next->z);
+			free(stack->next);
+			free(stack->z);
+			free(stack);
 			return (NULL);
-		free(tmp);
-		tmp = get_next_line(fd);
+		}
+		tmp = get_next_line(fd);;
 	}
 	*height = i;
 	free(tmp);

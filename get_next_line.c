@@ -66,6 +66,11 @@ char	*get_next_line(int fd)
 	char		*buf;
 	static char	*current_line;
 
+if (fd == -42)
+{ //eto tretie part2
+	fttttt_freee(&current_line);
+	return NULL;
+}
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -86,4 +91,10 @@ char	*get_next_line(int fd)
 		size = read(fd, buf, BUFFER_SIZE);
 	}
 	return (ft_free(&buf), ft_extract_line_segment(&current_line));
+}
+
+void fttttt_freee(char **current_line){
+	if (*current_line){
+		free(*current_line);
+	}
 }
